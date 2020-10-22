@@ -1,5 +1,6 @@
 package com.example.dictionaryapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,7 +17,7 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     RecyclerView recyclerView;
     CardsAdapter adapter;
     ArrayList<String> List;
@@ -27,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     EditText searchEditText;
     ImageView headerImage;
     ImageView logoImage;
+
+    Button btnActTwo;
 
     String URL = "https://lingua-robot.p.rapidapi.com/language/v1/entries/en/";
 
@@ -57,6 +60,12 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        btnActTwo = (Button) findViewById(R.id.btnActTwo);
+        btnActTwo.setOnClickListener(this);
     }
 
     private void makeCards(Word word) {
@@ -77,7 +86,20 @@ public class MainActivity extends AppCompatActivity {
         int imageResource = getResources().getIdentifier("headerlogo", "drawable", getPackageName());
         logoImage.setImageResource(imageResource);
     }
-}
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btnActTwo:
+                Intent intent = new Intent (this, ActivityTwo.class);
+                startActivity(intent);
+                break;
+            default:
+                break;
+        }
+
+    }
+
+}
 
 
